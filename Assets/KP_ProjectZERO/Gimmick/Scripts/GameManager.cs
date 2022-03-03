@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] const int ROOM_LEFT = 1;
-    [SerializeField] const int ROOM_FRONT = 2;
-    [SerializeField] const int ROOM_RIGHT = 3;
+    const int ROOM_LEFT = 1;
+    const int ROOM_FRONT = 2;
+    const int ROOM_RIGHT = 3;
     [SerializeField] GameObject panelRooms;
     int  roomNumber;
 
