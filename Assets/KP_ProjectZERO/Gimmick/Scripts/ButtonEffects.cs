@@ -15,12 +15,13 @@ public class ButtonEffects : MonoBehaviour
 
     public void ClickToFade()
     {
-
+        GetComponent<Button>().enabled = false;
         transform.DOScale(
     new Vector3(2, 2, 2), // スケール値
     1f                    // 演出時間
 );
         image.DOFade(0, 1f).OnComplete(ClickToFade2);
+
     }
 
     void ClickToFade2()
