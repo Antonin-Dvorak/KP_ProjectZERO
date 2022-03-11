@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 398783641}
   - component: {fileID: 398783640}
   - component: {fileID: 398783639}
+  - component: {fileID: 398783643}
   - component: {fileID: 398783642}
   m_Layer: 5
   m_Name: Button
@@ -206,9 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 398783642}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: PushStart
+      - m_Target: {fileID: 398783643}
+        m_TargetAssemblyTypeName: ButtonEffects, Assembly-CSharp
+        m_MethodName: ClickToFade
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -266,6 +267,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a91ba9b2ae1f3b49953a5e6bb6ee5ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &398783643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398783637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dbd88638cbc8a04c80b20181dc751af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &910822348
