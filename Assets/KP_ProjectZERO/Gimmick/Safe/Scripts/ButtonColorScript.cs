@@ -76,12 +76,12 @@ public class ButtonColorScript : MonoBehaviour
             }
             closeButton.GetComponent<Button>().enabled = false;
             audioSource.PlayOneShot(clip_open);
-            Invoke("FinishSafeGimmik", 1);
+            Invoke("FinishSafeGimmick", 1);
         }
         audioSource.PlayOneShot(clip_kati);
     }
 
-    void FinishSafeGimmik()
+    void FinishSafeGimmick()
     {
         clearSafeImage.SetActive(true);
         gameManager.gotBottle = true;
