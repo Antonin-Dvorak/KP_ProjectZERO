@@ -8,22 +8,31 @@ public class GameManager : MonoBehaviour
     const int ROOM_LEFT = 1;
     const int ROOM_FRONT = 2;
     const int ROOM_RIGHT = 3;
-    [SerializeField] GameObject panelRooms;
-    int  roomNumber;
+    int roomNumber;
 
+    [Header("UI")]
+    [SerializeField] GameObject panelRooms;
     [SerializeField] GameObject rightButton;
     [SerializeField] GameObject leftButton;
+    [SerializeField] GameObject hidePanelObj;
+    [SerializeField] GameObject lastPanelObj;
 
-    // Start is called before the first frame update
+    [Header("Clear後")]
+    [SerializeField] GameObject text5;//よくできたね
+
+    [Header("Flags")]
+    public bool gotBottle = false;
+    public bool gotSyringe = false;
+    public bool gotWrist = false;
+
+    [Header("Sounds")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip clip1;//会話終了ボタンSE
+
+
     void Start()
     {
         roomNumber = ROOM_FRONT;//開始時は真ん中の部屋を向いている
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void PushButtonRight()
@@ -35,6 +44,13 @@ public class GameManager : MonoBehaviour
             rightButton.SetActive(false);
         }
         DisplayRoom();
+
+        if ((roomNumber == ROOM_FRONT) & (gotWrist))
+        {
+            lastPanelObj.SetActive(true);
+            Invoke("Clear1", 2);
+
+        }
     }
 
     public void PushButtonLeft()
@@ -62,5 +78,61 @@ public class GameManager : MonoBehaviour
                 panelRooms.transform.localPosition = new Vector3(-1000f, 0f, 0f);
                 break;
         }
+    }
+
+ 
+    public void WhenGimmickOpen(GameObject gimmickWindowToOpen)
+    {
+        hidePanelObj.SetActive(true);
+        gimmickWindowToOpen.SetActive(true);
+    }
+
+    public void WhenGimmickClose(GameObject gimmickWindowToClose)
+    {
+        hidePanelObj.SetActive(false);
+        gimmickWindowToClose.SetActive(false);
+    }
+
+    public void WhenGimmickClear(GameObject gimmickWindowToClear)
+    {
+        gimmickWindowToClear.GetComponent<Button>().enabled = false;
+    }
+    
+    void Clear1()
+    {
+        text5.SetActive(true);
+    }
+
+
+
+    public void GotAnItem(GameObject item)
+    {
+        item.SetActive(true);
+    }
+
+    public void ShowMessage(GameObject textObj)
+    {
+        textObj.SetActive(true);
+    }
+
+
+    public void ButtonFalse(GameObject buttonObj)
+    {
+        buttonObj.SetActive(false);
+    }
+
+    public void ButtonFalse2(GameObject getItemObj)
+    {
+        getItemObj.SetActive(true);
+    }
+
+    public void ButtonFalse3(GameObject usedItemObj)
+    {
+        usedItemObj.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 1f);
+    }
+
+    public void SoundSE(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
     }
 }
