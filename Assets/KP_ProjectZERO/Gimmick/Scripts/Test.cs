@@ -11,6 +11,7 @@ public class Test : MonoBehaviour
     [SerializeField] GameObject bottle2Image;
     [SerializeField] GameObject wristImage;
     [SerializeField] GameObject wristButton;
+    [SerializeField] GameObject text;
 
     [Header("Sounds")]
     [SerializeField] AudioSource audioSource;
@@ -34,11 +35,16 @@ public class Test : MonoBehaviour
         {
             image.color = new Color(0f, 0f, 0f, 0f);
             gameManager.hidePanelObj.SetActive(true);
-            image.DOFade(0.25f, 1f).SetEase(Ease.Linear).OnComplete(TouchGimmick3_1);
+            image.DOFade(0.25f, 1f).SetEase(Ease.Linear).OnComplete(TouchGimmick3_0);
         }
     }
 
-    void TouchGimmick3_1()
+    void TouchGimmick3_0()
+    {
+        text.SetActive(true);
+    }
+
+    public void TouchGimmick3_1()
     {
         image.DOFade(1f, 2.5f).OnComplete(TouchGimmick3_2);
         audioSource.PlayOneShot(clip_wrist_cut);

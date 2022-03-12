@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,12 +20,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject lastPanelObj;
 
     [Header("Clear後")]
+    [SerializeField] GameObject clearBackImage;
     [SerializeField] GameObject text5;//よくできたね
+    [SerializeField] GameObject sister1;
+    [SerializeField] GameObject sister2;
 
     [Header("Flags")]
     public bool gotBottle = false;
     public bool gotSyringe = false;
     public bool gotWrist = false;
+    bool finish = false;
 
     [Header("Sounds")]
     [SerializeField] AudioSource audioSource;
@@ -31,6 +37,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip clip_tap;//ギミックウィンドウオープン
     [SerializeField] AudioClip clip_cancel;//ギミックウィンドウクローズ
     [SerializeField] AudioClip clip_get_item;//移動ボタン
+    [SerializeField] AudioClip clip_appear;
 
     void Start()
     {
@@ -50,10 +57,43 @@ public class GameManager : MonoBehaviour
 
         if ((roomNumber == ROOM_FRONT) & (gotWrist))
         {
-            lastPanelObj.SetActive(true);
-            Invoke("Clear1", 2);
-
+            audioSource.Stop();
+            SoundSE(clip_appear);
+            clearBackImage.SetActive(true);
+            sister1.SetActive(true);
+            Invoke("Clear0", 3f);
         }
+    }
+
+    void Clear0()
+    {
+        text5.SetActive(true);
+        Invoke("Clear1", 3f);
+    }
+    void Clear1()
+    {
+
+        hidePanelObj.SetActive(true);
+        hidePanelObj.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0.0f);
+        hidePanelObj.GetComponent<Image>().DOFade(1f, 12f).SetEase(Ease.Linear).OnComplete(GoStart);
+        Invoke("Clear2", 3f);
+    }
+
+    void Clear2()
+    {
+        lastPanelObj.SetActive(true);
+        lastPanelObj.GetComponent<Image>().DOFade(1f, 0.5f).SetEase(Ease.InQuad).SetLoops(2, LoopType.Yoyo);
+        Invoke("Clear3", 0.5f);
+    }
+    void Clear3()
+    {
+        sister1.SetActive(false);
+        sister2.SetActive(true);
+    }
+
+    void GoStart()
+    {
+        SceneManager.LoadScene("Start");
     }
 
     public void PushButtonLeft()
@@ -84,7 +124,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
- 
+
     public void WhenGimmickOpen(GameObject gimmickWindowToOpen)
     {
         SoundSE(clip_tap);
@@ -104,11 +144,7 @@ public class GameManager : MonoBehaviour
         SoundSE(clip_get_item);
         gimmickWindowToClear.GetComponent<Button>().enabled = false;
     }
-    
-    void Clear1()
-    {
-        text5.SetActive(true);
-    }
+
 
 
 

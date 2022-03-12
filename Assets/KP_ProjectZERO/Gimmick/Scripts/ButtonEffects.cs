@@ -20,9 +20,9 @@ public class ButtonEffects : MonoBehaviour
         audioSource.PlayOneShot(clip_game_start);
         GetComponent<Button>().enabled = false;
         transform.DOScale(
-    new Vector3(2, 2, 2), // スケール値
-    1f                    // 演出時間
-);
+        new Vector3(2, 2, 2), // スケール値
+        1f                    // 演出時間
+        );
         image.DOFade(0, 1f).OnComplete(ClickToFade2);
 
     }
