@@ -24,6 +24,10 @@ public class ButtonColorScript : MonoBehaviour
 [SerializeField] Color[] buttonColor = new Color[7];
     int[] colorInt = new int[7];
 
+    [Header("Sounds")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip clip_kati;
+    [SerializeField] AudioClip clip_open;
 
     void Start()
     {
@@ -69,14 +73,15 @@ public class ButtonColorScript : MonoBehaviour
             for (int i = 0; i < 3; ++i)
             {
                 buttonLamp[i].GetComponent<Button>().enabled = false;
-                //gameManager.SoundSE(clip1);
             }
             closeButton.GetComponent<Button>().enabled = false;
-            Invoke("FinishSafeGimmik", 1);
+            audioSource.PlayOneShot(clip_open);
+            Invoke("FinishSafeGimmick", 1);
         }
+        audioSource.PlayOneShot(clip_kati);
     }
 
-    void FinishSafeGimmik()
+    void FinishSafeGimmick()
     {
         clearSafeImage.SetActive(true);
         gameManager.gotBottle = true;

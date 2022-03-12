@@ -13,8 +13,13 @@ public class PIN : MonoBehaviour {
     [SerializeField] GameObject pinButton;
     [SerializeField] GameObject syringeButton;
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip clip_kati;
+    [SerializeField] AudioClip clip_open;
+
     public void CangeNumber(int n) 
     {
+        gameManager.SoundSE(clip_kati);
         nows[n] += 1;
         if(nows[n] >= numbers.Length) 
         {
@@ -30,10 +35,15 @@ public class PIN : MonoBehaviour {
             (nows[2] == 4) &&
             (nows[3] == 6))
         {
+            gameManager.SoundSE(clip_open);
             gameManager.gotSyringe = true;
             gameManager.WhenGimmickClear(pinButton);
             gameManager.GotAnItem(syringeButton);
             Destroy(this.gameObject);
+        }
+        else
+        {
+            gameManager.SoundSE(clip_kati);
         }
     }
 }
