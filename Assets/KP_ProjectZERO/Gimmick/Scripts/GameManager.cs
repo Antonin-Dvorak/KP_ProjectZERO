@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject panelRooms;
     [SerializeField] GameObject rightButton;
     [SerializeField] GameObject leftButton;
-    [SerializeField] GameObject hidePanelObj;
+    [SerializeField] public GameObject hidePanelObj;
     [SerializeField] GameObject lastPanelObj;
 
     [Header("Clear後")]
@@ -27,8 +27,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip clip1;//会話終了ボタンSE
-
+    [SerializeField] AudioClip clip_kati;//移動ボタン
+    [SerializeField] AudioClip clip_tap;//ギミックウィンドウオープン
+    [SerializeField] AudioClip clip_cancel;//ギミックウィンドウクローズ
+    [SerializeField] AudioClip clip_get_item;//移動ボタン
 
     void Start()
     {
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     public void PushButtonRight()
     {
+        SoundSE(clip_kati);
         roomNumber++;
         leftButton.SetActive(true);
         if (roomNumber == ROOM_RIGHT)//3
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void PushButtonLeft()
     {
+        SoundSE(clip_kati);
         roomNumber--;
         rightButton.SetActive(true);
         if (roomNumber == ROOM_LEFT)//1
@@ -83,18 +87,21 @@ public class GameManager : MonoBehaviour
  
     public void WhenGimmickOpen(GameObject gimmickWindowToOpen)
     {
+        SoundSE(clip_tap);
         hidePanelObj.SetActive(true);
         gimmickWindowToOpen.SetActive(true);
     }
 
     public void WhenGimmickClose(GameObject gimmickWindowToClose)
     {
+        SoundSE(clip_cancel);
         hidePanelObj.SetActive(false);
         gimmickWindowToClose.SetActive(false);
     }
 
     public void WhenGimmickClear(GameObject gimmickWindowToClear)
     {
+        SoundSE(clip_get_item);
         gimmickWindowToClear.GetComponent<Button>().enabled = false;
     }
     

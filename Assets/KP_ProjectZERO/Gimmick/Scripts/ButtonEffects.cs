@@ -7,7 +7,9 @@ using DG.Tweening;
 public class ButtonEffects : MonoBehaviour
 {
     Image image;
-    // Start is called before the first frame update
+    [Header("Sounds")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip clip_game_start;
     void Start()
     {
         image = GetComponent<Image>();
@@ -15,6 +17,7 @@ public class ButtonEffects : MonoBehaviour
 
     public void ClickToFade()
     {
+        audioSource.PlayOneShot(clip_game_start);
         GetComponent<Button>().enabled = false;
         transform.DOScale(
     new Vector3(2, 2, 2), // スケール値
@@ -28,4 +31,6 @@ public class ButtonEffects : MonoBehaviour
     {
         GetComponent<ChangeScene>().PushStart();
     }
+
+
 }
