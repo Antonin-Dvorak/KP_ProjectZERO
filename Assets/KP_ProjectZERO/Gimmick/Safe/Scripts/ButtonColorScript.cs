@@ -73,7 +73,6 @@ public class ButtonColorScript : MonoBehaviour
             for (int i = 0; i < 3; ++i)
             {
                 buttonLamp[i].GetComponent<Button>().enabled = false;
-                //gameManager.SoundSE(clip1);
             }
             closeButton.GetComponent<Button>().enabled = false;
             audioSource.PlayOneShot(clip_open);
